@@ -1425,7 +1425,7 @@ function brushed() {
   if (road.length == 0) return
   // Prevent recursive calls in case the change in the brush was triggered by a
   // zoom event
-  if (d3.event.sourceEvent && d3.event.sourceEvent.type === "zoom") return
+  if (!d3.event || !d3.event.sourceEvent || d3.event.sourceEvent.type !== "zoom") return
   var s = d3.event.selection || xScB.range()
   
   nXSc.domain(s.map(xScB.invert, xScB))
